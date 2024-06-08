@@ -8,8 +8,14 @@ import { Test } from '../../types/types';
 export class AccountsApiService {
   constructor(private http: HttpClient) {}
 
-  editAccount(accountId: string, accountRequestBody: Test) {
-    return this.http.patch(
+  editAccount(
+    accountId: string,
+    accountRequestBody: {
+      account_name: string;
+      description: string;
+    }
+  ) {
+    return this.http.patch<{ message: string }>(
       `http://localhost:4500/api/accounts/${accountId}`,
       accountRequestBody
     );

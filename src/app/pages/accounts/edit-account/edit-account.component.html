@@ -1,0 +1,28 @@
+<h3 mat-dialog-title>Edit Account</h3>
+
+<mat-dialog-content>
+  <section class="edit-account-form" [formGroup]="editAccountForm">
+    <mat-form-field appearance="outline" color="accent" class="account-name">
+      <mat-label>Account Name</mat-label>
+      <input type="text" matInput formControlName="account_name" />
+      <mat-error>Please enter the Account name!</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field
+      appearance="outline"
+      color="accent"
+      class="account-description"
+    >
+      <mat-label>Description</mat-label>
+      <input type="text" matInput formControlName="description" />
+      <mat-error>Description limit is of 500 characters!!</mat-error>
+    </mat-form-field>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="edit()">Edit</button>
+</mat-dialog-actions>

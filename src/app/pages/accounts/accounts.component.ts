@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogboxComponent } from '../../components/ui/confirm-dialogbox/confirm-dialogbox.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountsApiService } from './accounts-api.service';
+import { EditAccountComponent } from './edit-account/edit-account.component';
 
 @Component({
   selector: 'accounts',
@@ -107,6 +108,7 @@ export class AccountsComponent {
         if (dialogRes) {
           this.accountsApiService.deleteAccount(accountId).subscribe({
             next: (apiRes) => {
+              this.getAllAccounts();
               this.snackBar.open(apiRes.message, 'Dismiss', {
                 duration: 2000,
               });
@@ -117,7 +119,36 @@ export class AccountsComponent {
     });
   }
 
-  editAccount(accountBody: Test) {
-    console.log(accountBody);
+  editAccount(accountBody: {
+    account_id: string;
+    account_name: string;
+    description: string;
+  }) {
+    let dialogRef = this.dialog.open(EditAccountComponent, {
+      height: 'auto',
+      width: '2000px',
+      data: {
+        account_id: accountBody.account_id,
+        account_name: accountBody.account_name,
+        description: accountBody.description,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (res) => {
+        if (!res.cancel) {
+          this.accountsApiService
+            .editAccount(accountBody.account_id, res)
+            .subscribe({
+              next: (res) => {
+                this.getAllAccounts();
+                this.snackBar.open(res.message, 'Dismiss', {
+                  duration: 2000,
+                });
+              },
+            });
+        }
+      },
+    });
   }
 }

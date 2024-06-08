@@ -1,0 +1,38 @@
+.add-account-form {
+  margin-bottom: 50px;
+
+  h3 {
+    color: #033b20;
+  }
+
+  mat-form-field {
+    margin-right: 1rem;
+  }
+
+  .year {
+    width: 150px;
+  }
+
+  .month {
+    width: 150px;
+  }
+
+  .account-name {
+    width: 250px;
+  }
+
+  .account-description {
+    width: 1000px;
+  }
+}
+
+section.table {
+  min-width: 800px;
+  max-width: 1000px;
+
+  .mat-mdc-header-cell {
+    font-size: 1.1rem;
+    color: blue;
+    font-style: italic;
+  }
+}

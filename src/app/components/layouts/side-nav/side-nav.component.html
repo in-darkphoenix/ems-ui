@@ -1,0 +1,7 @@
+<mat-nav-list>
+  @for(navItem of navItems; track navItem){
+  <mat-list-item routerLink="/{{ navItem.link }}" routerLinkActive="active">
+    {{ navItem.name | titlecase }}
+  </mat-list-item>
+  }
+</mat-nav-list>

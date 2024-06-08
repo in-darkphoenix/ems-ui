@@ -1,53 +1,44 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Test } from '../../types/types';
+import {
+  AccountRequestBody,
+  AccountsResponse,
+  AccountResponse,
+} from '../../types/account.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountsApiService {
+  private ACCOUNTS_URL = 'http://localhost:4500/api/accounts/';
+
   constructor(private http: HttpClient) {}
 
-  editAccount(
-    accountId: string,
-    accountRequestBody: {
-      account_name: string;
-      description: string;
-    }
-  ) {
-    return this.http.patch<{ message: string }>(
-      `http://localhost:4500/api/accounts/${accountId}`,
+  editAccount(accountId: string, accountRequestBody: AccountRequestBody) {
+    return this.http.patch<AccountResponse>(
+      `${this.ACCOUNTS_URL}${accountId}`,
       accountRequestBody
     );
   }
 
-  addAccount(accountRequestBody: {
-    account_name: string;
-    description: string;
-  }) {
-    return this.http.post<{ message: string }>(
-      `http://localhost:4500/api/accounts/`,
+  addAccount(accountRequestBody: AccountRequestBody) {
+    return this.http.post<AccountResponse>(
+      `${this.ACCOUNTS_URL}`,
       accountRequestBody
     );
   }
 
   getAccounts() {
-    return this.http.get<{
-      message: string;
-      data: [];
-    }>(`http://localhost:4500/api/accounts/`);
+    return this.http.get<AccountsResponse>(`${this.ACCOUNTS_URL}`);
   }
 
   deleteAccount(accountId: string) {
-    return this.http.delete<{ message: string }>(
-      `http://localhost:4500/api/accounts/${accountId}`
+    return this.http.delete<AccountResponse>(
+      `${this.ACCOUNTS_URL}${accountId}`
     );
   }
 
   getAccountById(accountId: string) {
-    return this.http.get<{
-      message: string;
-      data: {};
-    }>(`http://localhost:4500/api/accounts/${accountId}`);
+    return this.http.get<AccountResponse>(`${this.ACCOUNTS_URL}${accountId}`);
   }
 }

@@ -7,12 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { Test } from '../../types/types';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogboxComponent } from '../../components/ui/confirm-dialogbox/confirm-dialogbox.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountsApiService } from './accounts-api.service';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import { Account, AccountDS } from '../../types/account.types';
 
 @Component({
   selector: 'accounts',
@@ -22,22 +22,14 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
   styleUrl: './accounts.component.scss',
 })
 export class AccountsComponent {
-  years: number[] = [];
-  months: { index: number; name: string }[] = [];
-  dataSource = new MatTableDataSource<{
-    account_id: string;
-    account_name: string;
-    description: string;
-    created_at: Date;
-    updated_at: Date;
-  }>();
+  // years: number[] = [];
+  // months: { index: number; name: string }[] = [];
+  dataSource = new MatTableDataSource<AccountDS>();
   accountsForm: FormGroup = this.fb.group({
     account_id: this.fb.control('0'),
     account_name: this.fb.control('', [Validators.required]),
     description: this.fb.control('', [Validators.maxLength(500)]),
     created_at: this.fb.control(''),
-    year: this.fb.control(2024),
-    month: this.fb.control(null),
   });
   columns = ['account_name', 'description', 'created_at', 'action'];
 
@@ -47,23 +39,23 @@ export class AccountsComponent {
     private snackBar: MatSnackBar,
     private accountsApiService: AccountsApiService
   ) {
-    for (let year = new Date().getFullYear(); year >= 2021; year--)
-      this.years.push(year);
+    // for (let year = new Date().getFullYear(); year >= 2021; year--)
+    //   this.years.push(year);
 
-    this.months = [
-      { index: 0, name: 'January' },
-      { index: 1, name: 'February' },
-      { index: 2, name: 'March' },
-      { index: 3, name: 'April' },
-      { index: 4, name: 'May' },
-      { index: 5, name: 'June' },
-      { index: 6, name: 'July' },
-      { index: 7, name: 'August' },
-      { index: 8, name: 'September' },
-      { index: 9, name: 'October' },
-      { index: 10, name: 'November' },
-      { index: 11, name: 'December' },
-    ];
+    // this.months = [
+    //   { index: 0, name: 'January' },
+    //   { index: 1, name: 'February' },
+    //   { index: 2, name: 'March' },
+    //   { index: 3, name: 'April' },
+    //   { index: 4, name: 'May' },
+    //   { index: 5, name: 'June' },
+    //   { index: 6, name: 'July' },
+    //   { index: 7, name: 'August' },
+    //   { index: 8, name: 'September' },
+    //   { index: 9, name: 'October' },
+    //   { index: 10, name: 'November' },
+    //   { index: 11, name: 'December' },
+    // ];
 
     this.getAllAccounts();
   }
@@ -119,11 +111,7 @@ export class AccountsComponent {
     });
   }
 
-  editAccount(accountBody: {
-    account_id: string;
-    account_name: string;
-    description: string;
-  }) {
+  editAccount(accountBody: Account) {
     let dialogRef = this.dialog.open(EditAccountComponent, {
       height: 'auto',
       width: '2000px',
@@ -135,14 +123,14 @@ export class AccountsComponent {
     });
 
     dialogRef.afterClosed().subscribe({
-      next: (res) => {
-        if (!res.cancel) {
+      next: (dialogRes) => {
+        if (!dialogRes.cancel) {
           this.accountsApiService
-            .editAccount(accountBody.account_id, res)
+            .editAccount(accountBody.account_id, dialogRes)
             .subscribe({
-              next: (res) => {
+              next: (apiRes) => {
                 this.getAllAccounts();
-                this.snackBar.open(res.message, 'Dismiss', {
+                this.snackBar.open(apiRes.message, 'Dismiss', {
                   duration: 2000,
                 });
               },

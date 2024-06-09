@@ -1,0 +1,15 @@
+.edit-category-form {
+  mat-form-field {
+    margin-right: 1rem;
+  }
+
+  .category-name {
+    width: 250px;
+    margin-top: 10px;
+  }
+
+  .category-description {
+    width: 500px;
+    margin-top: 10px;
+  }
+}

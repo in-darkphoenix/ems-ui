@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AccountRequestBody } from '../../../types/account.types';
 
 @Component({
   selector: 'app-edit-account',
@@ -23,10 +24,7 @@ export class EditAccountComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public editAccountPopup: {
-      account_name: string;
-      description: string;
-    },
+    public editAccountPopup: AccountRequestBody,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<EditAccountComponent>
   ) {

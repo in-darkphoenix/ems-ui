@@ -77,7 +77,7 @@ export class AccountsComponent {
     this.accountsApiService.addAccount(addAccountFormInput).subscribe({
       next: (res) => {
         this.accountsForm.reset();
-        this.accountsForm.get('month')?.setValue(null);
+        // this.accountsForm.get('month')?.setValue(null);
         this.getAllAccounts();
         this.snackBar.open(res.message, 'Dismiss', {
           duration: 2000,
@@ -116,7 +116,6 @@ export class AccountsComponent {
       height: 'auto',
       width: '2000px',
       data: {
-        account_id: accountBody.account_id,
         account_name: accountBody.account_name,
         description: accountBody.description,
       },

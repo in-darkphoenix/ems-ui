@@ -1,0 +1,28 @@
+<h3 mat-dialog-title>Edit Category</h3>
+
+<mat-dialog-content>
+  <section class="edit-category-form" [formGroup]="editCategoryForm">
+    <mat-form-field appearance="outline" color="accent" class="category-name">
+      <mat-label>Category Name</mat-label>
+      <input type="text" matInput formControlName="category_name" />
+      <mat-error>Please enter the Category name!</mat-error>
+    </mat-form-field>
+
+    <br />
+
+    <mat-form-field
+      appearance="outline"
+      color="accent"
+      class="category-description"
+    >
+      <mat-label>Description</mat-label>
+      <input type="text" matInput formControlName="description" />
+      <mat-error>Description limit is of 500 characters!!</mat-error>
+    </mat-form-field>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="edit()">Edit</button>
+</mat-dialog-actions>

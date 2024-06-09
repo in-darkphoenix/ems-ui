@@ -1,1 +1,76 @@
-<p>categories works!</p>
+<section class="add-category-form" [formGroup]="categoriesForm">
+  <h3>Categories</h3>
+
+  <mat-form-field appearance="outline" color="accent" class="category-name">
+    <mat-label>Category Name</mat-label>
+    <input type="text" matInput formControlName="category_name" />
+    <mat-error>Please enter the Category name!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field
+    appearance="outline"
+    color="accent"
+    class="category-description"
+  >
+    <mat-label>Description</mat-label>
+    <input type="text" matInput formControlName="description" />
+    <mat-error>Description limit is of 500 characters!!</mat-error>
+  </mat-form-field>
+
+  <br />
+  <button
+    mat-raised-button
+    primary-color
+    [disabled]="categoriesForm.invalid"
+    (click)="addCategory()"
+  >
+    Add
+  </button>
+</section>
+
+<section class="table">
+  <table mat-table [dataSource]="categoryDataSource">
+    <ng-container matColumnDef="category_name">
+      <th mat-header-cell *matHeaderCellDef>Category Name</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.category_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+      <th mat-header-cell *matHeaderCellDef>Created At</th>
+      <td mat-cell *matCellDef="let elem">
+        {{ elem.created_at | date : "YYYY-MM-dd hh:mm:ss" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let elem">
+        <button
+          mat-icon-button
+          color="accent"
+          matTooltip="Edit Category"
+          (click)="editCategory(elem)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          warn-color
+          matTooltip="Delete Category"
+          (click)="deleteCategory(elem.category_id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+</section>

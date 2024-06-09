@@ -15,7 +15,7 @@ export class AccountsApiService {
   constructor(private http: HttpClient) {}
 
   editAccount(accountId: string, accountRequestBody: AccountRequestBody) {
-    return this.http.patch<AccountResponse>(
+    return this.http.put<AccountResponse>(
       `${this.ACCOUNTS_URL}${accountId}`,
       accountRequestBody
     );

@@ -14,11 +14,11 @@ export class SideNavComponent {
     name: string;
     link: string;
   }[] = [
-    { name: 'accounts', link: 'account' },
-    { name: 'categories', link: 'category' },
-    { name: 'users', link: 'user' },
-    { name: 'roles', link: 'role' },
-    { name: 'transaction type', link: 'transaction-type' },
+    { name: 'accounts', link: 'accounts' },
+    { name: 'categories', link: 'categories' },
+    { name: 'users', link: 'users' },
+    { name: 'roles', link: 'roles' },
     { name: 'transactions', link: 'transactions' },
+    { name: 'monthly summary', link: 'summaries' },
   ];
 }

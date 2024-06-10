@@ -1,0 +1,76 @@
+<h3 mat-dialog-title>Edit Account</h3>
+
+<mat-dialog-content>
+  <section class="edit-transaction-form" [formGroup]="editTransactionForm">
+    <mat-form-field
+      appearance="outline"
+      primary-color
+      class="transaction-title"
+    >
+      <mat-label>title</mat-label>
+      <input type="text" matInput formControlName="title" />
+      <mat-error>please enter the transaction title!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" primary-color class="tx-account">
+      <mat-label>account</mat-label>
+      <mat-select formControlName="account">
+        @for(account of accounts; track account) {
+        <mat-option [value]="account.value">{{ account.name }}</mat-option>
+        }
+      </mat-select>
+      <mat-error>please select the transaction account!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" primary-color class="tx-category">
+      <mat-label>category</mat-label>
+      <mat-select formControlName="category">
+        @for(category of categories; track category) {
+        <mat-option [value]="category.value">{{ category.name }}</mat-option>
+        }
+      </mat-select>
+      <mat-error>please select the transaction category!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" primary-color class="tx-type">
+      <mat-label>transaction type</mat-label>
+      <mat-select formControlName="transaction_type">
+        @for(txType of transactionTypes; track txType) {
+        <mat-option [value]="txType.value">{{ txType.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" primary-color class="tx-date">
+      <mat-label>transaction date</mat-label>
+      <input
+        matInput
+        formControlName="transaction_date"
+        [min]="minDate"
+        [max]="maxDate"
+        [matDatepicker]="picker"
+      />
+
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      primary-color
+      class="transaction-description"
+    >
+      <mat-label>description</mat-label>
+      <input type="text" matInput formControlName="description" />
+      <mat-error>description limit is of 300 characters!!</mat-error>
+    </mat-form-field>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="edit()">Edit</button>
+</mat-dialog-actions>

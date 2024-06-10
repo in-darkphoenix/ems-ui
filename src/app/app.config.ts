@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
+    provideNativeDateAdapter(), provideAnimationsAsync(), provideAnimationsAsync(),
   ],
 };

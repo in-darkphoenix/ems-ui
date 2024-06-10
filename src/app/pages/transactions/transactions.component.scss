@@ -1,0 +1,49 @@
+.add-transaction-form {
+  margin-bottom: 50px;
+
+  h3 {
+    color: #033b20;
+  }
+
+  mat-form-field {
+    margin-right: 1rem;
+  }
+
+  .transaction-notes {
+    margin-top: 8px;
+    width: 500px;
+  }
+
+  .transaction-title {
+    width: 250px;
+  }
+
+  .transaction-description {
+    width: 750px;
+  }
+
+  // .tx-date {
+  //   background-color: white;
+  // }
+
+  .tx-button-container {
+    margin-top: 10px;
+    display: flex;
+    // justify-content: space-between;
+
+    button.tx-clear {
+      margin-left: 20px;
+    }
+  }
+}
+
+// section.table {
+//   min-width: 800px;
+//   max-width: 1000px;
+
+//   .mat-mdc-header-cell {
+//     font-size: 1.1rem;
+//     color: blue;
+//     font-style: italic;
+//   }
+// }

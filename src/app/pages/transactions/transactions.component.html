@@ -1,0 +1,136 @@
+<section class="add-transaction-form" [formGroup]="transactionsForm">
+  <h3>Transactions</h3>
+
+  <mat-form-field appearance="outline" primary-color class="transaction-title">
+    <mat-label>title</mat-label>
+    <input type="text" matInput formControlName="title" />
+    <mat-error>please enter the transaction title!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" primary-color class="tx-account">
+    <mat-label>account</mat-label>
+    <mat-select formControlName="account">
+      @for(account of accounts; track account) {
+      <mat-option [value]="account.value">{{ account.name }}</mat-option>
+      }
+    </mat-select>
+    <mat-error>please select the transaction account!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" primary-color class="tx-category">
+    <mat-label>category</mat-label>
+    <mat-select formControlName="category">
+      @for(category of categories; track category) {
+      <mat-option [value]="category.value">{{ category.name }}</mat-option>
+      }
+    </mat-select>
+    <mat-error>please select the transaction category!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" primary-color class="tx-type">
+    <mat-label>transaction type</mat-label>
+    <mat-select formControlName="transaction_type">
+      @for(txType of transactionTypes; track txType) {
+      <mat-option [value]="txType.value">{{ txType.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" primary-color class="tx-date">
+    <mat-label>transaction date</mat-label>
+    <input
+      matInput
+      formControlName="transaction_date"
+      [min]="minDate"
+      [max]="maxDate"
+      [matDatepicker]="picker"
+    />
+
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field
+    appearance="outline"
+    primary-color
+    class="transaction-description"
+  >
+    <mat-label>description</mat-label>
+    <input type="text" matInput formControlName="description" />
+    <mat-error>description limit is of 300 characters!!</mat-error>
+  </mat-form-field>
+
+  <!-- <mat-form-field appearance="outline" primary-color class="transaction-notes">
+    <mat-label>notes</mat-label>
+    <textarea matInput formControlName="notes" rows="5"></textarea>
+    <mat-error>notes limit is of 500 characters!!</mat-error>
+  </mat-form-field> -->
+
+  <br />
+  <div class="tx-button-container">
+    <button
+      mat-raised-button
+      primary-color
+      [disabled]="transactionsForm.invalid"
+      (click)="logTransaction()"
+    >
+      Log Transaction
+    </button>
+
+    <button
+      mat-raised-button
+      primary-color
+      class="tx-clear"
+      (click)="clearForm()"
+    >
+      Clear
+    </button>
+  </div>
+</section>
+
+<!-- <section class="table">
+  <table mat-table [dataSource]="categoryDataSource">
+    <ng-container matColumnDef="category_name">
+      <th mat-header-cell *matHeaderCellDef>Category Name</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.category_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+      <th mat-header-cell *matHeaderCellDef>Created At</th>
+      <td mat-cell *matCellDef="let elem">
+        {{ elem.created_at | date : "YYYY-MM-dd hh:mm:ss" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let elem">
+        <button
+          mat-icon-button
+          color="accent"
+          matTooltip="Edit Category"
+          (click)="editCategory(elem)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          warn-color
+          matTooltip="Delete Category"
+          (click)="deleteCategory(elem.category_id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+</section> -->

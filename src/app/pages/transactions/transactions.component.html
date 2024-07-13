@@ -7,6 +7,20 @@
     <mat-error>please enter the transaction title!</mat-error>
   </mat-form-field>
 
+  <mat-form-field appearance="outline" primary-color class="transaction-amount">
+    <mat-label>amount</mat-label>
+    <input type="number" matInput formControlName="amount" />
+    <mat-error *ngIf="transactionsForm.get('amount')?.hasError('required')"
+      >please enter the transaction amount!</mat-error
+    >
+    <mat-error *ngIf="transactionsForm.get('amount')?.hasError('min')"
+      >transaction amount should be greater than 0!</mat-error
+    >
+    <mat-error *ngIf="transactionsForm.get('amount')?.hasError('max')"
+      >transaction amount should be less than 10000000000!</mat-error
+    >
+  </mat-form-field>
+
   <mat-form-field appearance="outline" primary-color class="tx-account">
     <mat-label>account</mat-label>
     <mat-select formControlName="account">
@@ -88,11 +102,16 @@
   </div>
 </section>
 
-<!-- <section class="table">
-  <table mat-table [dataSource]="categoryDataSource">
-    <ng-container matColumnDef="category_name">
-      <th mat-header-cell *matHeaderCellDef>Category Name</th>
-      <td mat-cell *matCellDef="let elem">{{ elem.category_name }}</td>
+<section class="table">
+  <table mat-table [dataSource]="transactionDataSource">
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.amount }}</td>
     </ng-container>
 
     <ng-container matColumnDef="description">
@@ -100,22 +119,32 @@
       <td mat-cell *matCellDef="let elem">{{ elem.description }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="created_at">
-      <th mat-header-cell *matHeaderCellDef>Created At</th>
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>Category</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.category.category_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="account">
+      <th mat-header-cell *matHeaderCellDef>Account</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.account.account_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let elem">{{ elem.transaction_offset }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="logged_at">
+      <th mat-header-cell *matHeaderCellDef>Logged At</th>
       <td mat-cell *matCellDef="let elem">
-        {{ elem.created_at | date : "YYYY-MM-dd hh:mm:ss" }}
+        {{ elem.created_at | date : "hh:mm:ss" }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let elem">
-        <button
-          mat-icon-button
-          color="accent"
-          matTooltip="Edit Category"
-          (click)="editCategory(elem)"
-        >
+        <button mat-icon-button color="accent" matTooltip="Edit Category">
           <mat-icon>edit</mat-icon>
         </button>
 
@@ -123,7 +152,7 @@
           mat-icon-button
           warn-color
           matTooltip="Delete Category"
-          (click)="deleteCategory(elem.category_id)"
+          (click)="deleteTransaction(elem.transaction_id)"
         >
           <mat-icon>delete</mat-icon>
         </button>
@@ -133,4 +162,4 @@
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
-</section> -->
+</section>

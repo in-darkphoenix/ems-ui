@@ -18,6 +18,10 @@
     width: 250px;
   }
 
+  .transaction-amount {
+    width: 150px;
+  }
+
   .transaction-description {
     width: 750px;
   }
@@ -37,13 +41,13 @@
   }
 }
 
-// section.table {
-//   min-width: 800px;
-//   max-width: 1000px;
+section.table {
+  min-width: 800px;
+  max-width: 1000px;
 
-//   .mat-mdc-header-cell {
-//     font-size: 1.1rem;
-//     color: blue;
-//     font-style: italic;
-//   }
-// }
+  .mat-mdc-header-cell {
+    font-size: 1.1rem;
+    color: blue;
+    font-style: italic;
+  }
+}

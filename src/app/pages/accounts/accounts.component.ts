@@ -12,7 +12,7 @@ import { ConfirmDialogboxComponent } from '../../components/ui/confirm-dialogbox
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountsApiService } from './accounts-api.service';
 import { EditAccountComponent } from './edit-account/edit-account.component';
-import { Account, AccountDS } from '../../types/account.types';
+import { Account } from '../../types/account.types';
 
 @Component({
   selector: 'accounts',
@@ -22,9 +22,7 @@ import { Account, AccountDS } from '../../types/account.types';
   styleUrl: './accounts.component.scss',
 })
 export class AccountsComponent {
-  // years: number[] = [];
-  // months: { index: number; name: string }[] = [];
-  dataSource = new MatTableDataSource<AccountDS>();
+  dataSource = new MatTableDataSource();
   accountsForm: FormGroup = this.fb.group({
     account_id: this.fb.control('0'),
     account_name: this.fb.control('', [Validators.required]),
@@ -39,24 +37,6 @@ export class AccountsComponent {
     private snackBar: MatSnackBar,
     private accountsApiService: AccountsApiService
   ) {
-    // for (let year = new Date().getFullYear(); year >= 2021; year--)
-    //   this.years.push(year);
-
-    // this.months = [
-    //   { index: 0, name: 'January' },
-    //   { index: 1, name: 'February' },
-    //   { index: 2, name: 'March' },
-    //   { index: 3, name: 'April' },
-    //   { index: 4, name: 'May' },
-    //   { index: 5, name: 'June' },
-    //   { index: 6, name: 'July' },
-    //   { index: 7, name: 'August' },
-    //   { index: 8, name: 'September' },
-    //   { index: 9, name: 'October' },
-    //   { index: 10, name: 'November' },
-    //   { index: 11, name: 'December' },
-    // ];
-
     this.getAllAccounts();
   }
 
@@ -71,7 +51,7 @@ export class AccountsComponent {
   addAccount() {
     const addAccountFormInput = {
       account_name: this.accountsForm.get('account_name')?.value,
-      description: this.accountsForm.get('description')?.value,
+      description: this.accountsForm.get('description')?.value || null,
     };
 
     this.accountsApiService.addAccount(addAccountFormInput).subscribe({

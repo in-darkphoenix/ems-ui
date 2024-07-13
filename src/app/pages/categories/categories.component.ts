@@ -35,7 +35,7 @@ export class CategoriesComponent {
     private fb: FormBuilder,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private categoriesApiServiec: CategoriesApiService
+    private categoriesApiService: CategoriesApiService
   ) {
     this.getAllCategories();
   }
@@ -53,7 +53,7 @@ export class CategoriesComponent {
     dialogRef.afterClosed().subscribe({
       next: (dialogRes) => {
         if (!dialogRes.cancel) {
-          this.categoriesApiServiec
+          this.categoriesApiService
             .editCategory(categoryBody.category_id, dialogRes)
             .subscribe({
               next: (apiRes) => {
@@ -71,10 +71,10 @@ export class CategoriesComponent {
   addCategory() {
     const addCategoryFormInput = {
       category_name: this.categoriesForm.get('category_name')?.value,
-      description: this.categoriesForm.get('description')?.value,
+      description: this.categoriesForm.get('description')?.value || null,
     };
 
-    this.categoriesApiServiec.addCategory(addCategoryFormInput).subscribe({
+    this.categoriesApiService.addCategory(addCategoryFormInput).subscribe({
       next: (res) => {
         this.categoriesForm.reset();
         this.getAllCategories();
@@ -86,7 +86,7 @@ export class CategoriesComponent {
   }
 
   getAllCategories() {
-    this.categoriesApiServiec.getCategories().subscribe({
+    this.categoriesApiService.getCategories().subscribe({
       next: (res) => {
         this.categoryDataSource.data = res.data;
       },
@@ -105,7 +105,7 @@ export class CategoriesComponent {
     dialogRef.afterClosed().subscribe({
       next: (dialogRes: boolean) => {
         if (dialogRes) {
-          this.categoriesApiServiec.deleteCategory(categoryId).subscribe({
+          this.categoriesApiService.deleteCategory(categoryId).subscribe({
             next: (apiRes) => {
               this.getAllCategories();
               this.snackBar.open(apiRes.message, 'Dismiss', {

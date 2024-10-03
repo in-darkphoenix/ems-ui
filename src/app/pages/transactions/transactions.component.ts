@@ -13,7 +13,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EditTransactionComponent } from './edit-transaction/edit-transaction.component';
 import { AccountsApiService } from '../accounts/accounts-api.service';
 import { CategoriesApiService } from './../categories/categories-api.service';
-import { TransactionRequestBody } from '../../types/transaction.types';
+import {
+  Transaction,
+  TransactionRequestBody,
+} from '../../types/transaction.types';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmDialogboxComponent } from '../../components/ui/confirm-dialogbox/confirm-dialogbox.component';
 
@@ -118,14 +121,34 @@ export class TransactionsComponent {
       });
   }
 
-  editTransaction(transactionBody: {}) {
+  editTransaction(transactionBody: Transaction) {
     let dialogRef = this.dialog.open(EditTransactionComponent, {
       height: 'auto',
       width: '2000px',
       data: {
-        // account_name: transactionBody.account_name,
-        // description: accountBody.description,
-        date: this.minDate,
+        ...transactionBody,
+        minDate: this.minDate,
+        maxDate: this.maxDate,
+        transactionTypes: this.transactionTypes,
+        categories: this.categories,
+        accounts: this.accounts,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (dialogRes) => {
+        if (!dialogRes.cancel) {
+          // this.accountsApiService
+          //   .editAccount(accountBody.account_id, dialogRes)
+          //   .subscribe({
+          //     next: (apiRes) => {
+          //       this.getAllAccounts();
+          //       this.snackBar.open(apiRes.message, 'Dismiss', {
+          //         duration: 2000,
+          //       });
+          //     },
+          //   });
+        }
       },
     });
   }
@@ -191,5 +214,18 @@ export class TransactionsComponent {
         }
       },
     });
+  }
+
+  convertUTCToLocalTime(utcDateStr: Date) {
+    const utcDate: Date = new Date(utcDateStr);
+
+    const localTime = utcDate.toLocaleTimeString('en-US', {
+      hour12: false, // Use 24-hour format
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+
+    return localTime;
   }
 }

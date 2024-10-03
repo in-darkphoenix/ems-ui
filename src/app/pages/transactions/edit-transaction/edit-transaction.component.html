@@ -1,4 +1,4 @@
-<!-- <h3 mat-dialog-title>Edit Account</h3>
+<h3 mat-dialog-title>Edit Account</h3>
 
 <mat-dialog-content>
   <section class="edit-transaction-form" [formGroup]="editTransactionForm">
@@ -10,6 +10,24 @@
       <mat-label>title</mat-label>
       <input type="text" matInput formControlName="title" />
       <mat-error>please enter the transaction title!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      primary-color
+      class="transaction-amount"
+    >
+      <mat-label>amount</mat-label>
+      <input type="number" matInput formControlName="amount" />
+      <mat-error *ngIf="editTransactionForm.get('amount')?.hasError('required')"
+        >please enter the transaction amount!</mat-error
+      >
+      <mat-error *ngIf="editTransactionForm.get('amount')?.hasError('min')"
+        >transaction amount should be greater than 0!</mat-error
+      >
+      <mat-error *ngIf="editTransactionForm.get('amount')?.hasError('max')"
+        >transaction amount should be less than 10000000000!</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field appearance="outline" primary-color class="tx-account">
@@ -73,4 +91,4 @@
 <mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>
   <button mat-button (click)="edit()">Edit</button>
-</mat-dialog-actions> -->
+</mat-dialog-actions>

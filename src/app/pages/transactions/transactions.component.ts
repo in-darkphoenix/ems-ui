@@ -138,16 +138,16 @@ export class TransactionsComponent {
     dialogRef.afterClosed().subscribe({
       next: (dialogRes) => {
         if (!dialogRes.cancel) {
-          // this.accountsApiService
-          //   .editAccount(accountBody.account_id, dialogRes)
-          //   .subscribe({
-          //     next: (apiRes) => {
-          //       this.getAllAccounts();
-          //       this.snackBar.open(apiRes.message, 'Dismiss', {
-          //         duration: 2000,
-          //       });
-          //     },
-          //   });
+          this.transactionsApiService
+            .editTransaction(transactionBody.transaction_id, dialogRes)
+            .subscribe({
+              next: (apiRes) => {
+                this.getAllTransactions();
+                this.snackBar.open(apiRes.message, 'Dismiss', {
+                  duration: 2000,
+                });
+              },
+            });
         }
       },
     });

@@ -4,12 +4,14 @@ import { AccountsComponent } from './pages/accounts/accounts.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { MonthlySummariesComponent } from './pages/monthly-summaries/monthly-summaries.component';
+import { PasswordsComponent } from './pages/passwords/passwords.component';
 
 export const routes: Routes = [
   { path: 'accounts', component: AccountsComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'transactions', component: TransactionsComponent },
   { path: 'summaries', component: MonthlySummariesComponent },
+  { path: 'passwords', component: PasswordsComponent },
   { path: '', redirectTo: 'transactions', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

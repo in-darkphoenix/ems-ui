@@ -16,27 +16,6 @@ import { MaterialModule } from '../../../material/material.module';
   styleUrl: './edit-transaction.component.scss',
 })
 export class EditTransactionComponent {
-  editTransactionForm: FormGroup = this.fb.group({
-    title: this.fb.control('', [Validators.required]),
-    amount: this.fb.control('', [
-      Validators.required,
-      Validators.min(0.0),
-      Validators.max(99999999.99),
-    ]),
-    description: this.fb.control('', [Validators.maxLength(300)]),
-    notes: this.fb.control('', [Validators.maxLength(500)]),
-    transaction_type: this.fb.control('DEBIT'),
-    account: this.fb.control('', [Validators.required]),
-    category: this.fb.control('', [Validators.required]),
-    transaction_date: this.fb.control(''),
-  });
-
-  accounts: { value: string; name: string }[] = [];
-  categories: { value: string; name: string }[] = [];
-  transactionTypes: { value: string; name: string }[] = [];
-  minDate: Date;
-  maxDate: Date;
-
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public editTransactionPopup: any,
@@ -61,20 +40,38 @@ export class EditTransactionComponent {
       ?.setValue(editTransactionPopup.transaction_offset);
     this.editTransactionForm
       .get('account')
-      ?.setValue(editTransactionPopup.account.account_name);
+      ?.setValue(editTransactionPopup.account.account_id);
     this.editTransactionForm
       .get('category')
-      ?.setValue(editTransactionPopup.category.category_name);
+      ?.setValue(editTransactionPopup.category.category_id);
     this.editTransactionForm
       .get('transaction_date')
       ?.setValue(editTransactionPopup.created_at);
   }
 
-  buildForm() {}
+  editTransactionForm: FormGroup = this.fb.group({
+    title: this.fb.control('', [Validators.required]),
+    amount: this.fb.control('', [
+      Validators.required,
+      Validators.min(0.0),
+      Validators.max(99999999.99),
+    ]),
+    description: this.fb.control('', [Validators.maxLength(300)]),
+    notes: this.fb.control('', [Validators.maxLength(500)]),
+    transaction_type: this.fb.control('DEBIT'),
+    account: this.fb.control('', [Validators.required]),
+    category: this.fb.control('', [Validators.required]),
+    transaction_date: this.fb.control(''),
+  });
+
+  accounts: { value: string; name: string }[] = [];
+  categories: { value: string; name: string }[] = [];
+  transactionTypes: { value: string; name: string }[] = [];
+  minDate: Date;
+  maxDate: Date;
 
   edit() {
     this.dialogRef.close(this.editTransactionForm.value);
-    console.log(this.editTransactionForm.value);
   }
 
   cancel() {

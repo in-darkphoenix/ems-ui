@@ -60,6 +60,7 @@ export class TransactionsComponent {
   transactionTypes: { value: string; name: string }[] = [];
   minDate: Date;
   maxDate: Date;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -227,5 +228,16 @@ export class TransactionsComponent {
     });
 
     return localTime;
+  }
+
+  printPDF() {
+    this.isLoading = true;
+    this.transactionsApiService.generatePDF().subscribe({
+      next: (res) => {
+        const pdf = URL.createObjectURL(res);
+        window.open(pdf);
+        this.isLoading = false;
+      },
+    });
   }
 }

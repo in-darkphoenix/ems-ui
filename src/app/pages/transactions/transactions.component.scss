@@ -38,6 +38,10 @@
     button.tx-clear {
       margin-left: 20px;
     }
+
+    button.tx-pdf {
+      margin-left: 20px;
+    }
   }
 }
 
@@ -49,5 +53,35 @@ section.table {
     font-size: 1.1rem;
     color: blue;
     font-style: italic;
+  }
+}
+
+.loading-overlay {
+  position: fixed; /* Make overlay cover the entire screen */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center; /* Center spinner vertically */
+  justify-content: center; /* Center spinner horizontally */
+  z-index: 9999; /* Higher z-index to cover other elements */
+}
+.loading-spinner {
+  border: 8px solid rgba(255, 255, 255, 0.3); /* Light color for the border */
+  border-left: 8px solid #ffffff; /* Spinner color */
+  border-radius: 50%;
+  width: 60px; /* Spinner size */
+  height: 60px; /* Spinner size */
+  animation: spin 1s linear infinite; /* Spin animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

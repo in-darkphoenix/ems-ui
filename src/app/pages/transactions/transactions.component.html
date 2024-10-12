@@ -99,8 +99,16 @@
     >
       Clear
     </button>
+
+    <button mat-raised-button primary-color class="tx-pdf" (click)="printPDF()">
+      Get Pdf
+    </button>
   </div>
 </section>
+
+<div *ngIf="isLoading" class="loading-overlay">
+  <div class="loading-spinner"></div>
+</div>
 
 <section class="table">
   <table mat-table [dataSource]="transactionDataSource">

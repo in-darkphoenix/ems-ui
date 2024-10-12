@@ -11,6 +11,7 @@ import {
 })
 export class TransactionsApiService {
   private TRANSACTIONS_URL = 'http://localhost:4500/api/transactions/';
+  private SUMMARY_URL = 'http://localhost:4500/api/summaries/';
 
   constructor(private http: HttpClient) {}
 
@@ -39,5 +40,11 @@ export class TransactionsApiService {
     return this.http.delete<TransactionResponse>(
       `${this.TRANSACTIONS_URL}${transactionId}`
     );
+  }
+
+  generatePDF() {
+    return this.http.get(`${this.SUMMARY_URL}/getpdf?month=9&year=2024`, {
+      responseType: 'blob',
+    });
   }
 }

@@ -1,0 +1,16 @@
+<section class="login-form" [formGroup]="loginForm">
+  <mat-form-field appearance="outline" color="accent" class="user-name">
+    <mat-label>username</mat-label>
+    <input type="text" matInput formControlName="username" />
+    <mat-error>Please enter the username!</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" color="accent" class="user-password">
+    <mat-label>password</mat-label>
+    <input type="password" matInput formControlName="password" />
+    <mat-error>Please enter the password!</mat-error>
+  </mat-form-field>
+  <div class="form-buttons">
+    <button class="button button-primary" (click)="login()">Login</button>
+  </div>
+</section>

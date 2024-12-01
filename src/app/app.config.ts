@@ -8,6 +8,7 @@ import {
 
 import { routes } from './app.routes';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { httpInterceptorProviders } from './interceptors/http-interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideNativeDateAdapter(), provideAnimationsAsync(), provideAnimationsAsync(),
+    httpInterceptorProviders,
+    provideNativeDateAdapter(),
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
   ],
 };

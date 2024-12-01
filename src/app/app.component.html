@@ -1,10 +1,10 @@
 <page-header (onMenuClick)="isMenuClicked = !isMenuClicked" />
 
 <mat-drawer-container>
-  <mat-drawer mode="side" [opened]="isMenuClicked">
+  <mat-drawer mode="side" [opened]="getIsLoggedIn() && isMenuClicked">
     <side-nav />
   </mat-drawer>
   <main>
-    <router-outlet />
+    <router-outlet (activate)="catchEvent($event)" />
   </main>
 </mat-drawer-container>

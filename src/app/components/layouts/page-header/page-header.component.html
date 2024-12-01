@@ -3,4 +3,13 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>Cat Expense Management System</span>
+  <!-- <div *ngIf="isAuth" class="profile-container"> -->
+  <div *ngIf="getIsLoggedIn()" class="profile-container">
+    <img src="/assests/cat-1484725_640.png" />
+  </div>
+  <div *ngIf="getIsLoggedIn()" class="logout-container">
+    <button mat-icon-button (click)="logout()">
+      <mat-icon color="warn">exit_to_app</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>

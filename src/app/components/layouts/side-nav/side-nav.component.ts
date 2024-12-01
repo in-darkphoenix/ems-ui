@@ -20,6 +20,6 @@ export class SideNavComponent {
     { name: 'roles', link: 'roles' },
     { name: 'transactions', link: 'transactions' },
     { name: 'monthly summary', link: 'summaries' },
-    { name: 'password manager', link: 'passwords' },
+    { name: 'password manager', link: 'passwords' }
   ];
 }

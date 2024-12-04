@@ -43,8 +43,14 @@ export class TransactionsApiService {
   }
 
   generatePDF() {
-    return this.http.get(`${this.SUMMARY_URL}/getpdf?month=9&year=2024`, {
-      responseType: 'blob',
-    });
+    const today: Date = new Date();
+    const month = today.getMonth() + 1; // Months are zero-based, so add 1 (0-11)
+    const year = today.getFullYear();
+    return this.http.get(
+      `${this.SUMMARY_URL}/getpdf?month=${month}&year=${year}`,
+      {
+        responseType: 'blob',
+      }
+    );
   }
 }

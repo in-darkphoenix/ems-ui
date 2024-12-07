@@ -5,6 +5,7 @@
 // }
 
 export interface ITransferPasswordBody {
+  account_title: string;
   account_name: string;
   account_url: string;
   original_password: string;
@@ -13,6 +14,7 @@ export interface ITransferPasswordBody {
 }
 
 export interface IPasswordRequestBody {
+  account_title: string;
   account_name: string;
   account_url: string;
   original_password: string;
@@ -42,6 +44,7 @@ export interface IAddPasswordResponse {
 // }
 export interface IPasswordCard {
   password_id: string;
+  account_title: string;
   account_name: string;
   account_url: string;
   hide: boolean;

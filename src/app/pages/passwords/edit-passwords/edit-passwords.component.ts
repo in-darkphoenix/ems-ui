@@ -24,6 +24,9 @@ export class EditPasswordsComponent {
     private dialogRef: MatDialogRef<EditPasswordsComponent>
   ) {
     this.editPasswordForm
+      .get('account_title')
+      ?.setValue(editPasswordPopup.account_title);
+    this.editPasswordForm
       .get('account_name')
       ?.setValue(editPasswordPopup.account_name);
     this.editPasswordForm
@@ -44,6 +47,10 @@ export class EditPasswordsComponent {
 
   hide: boolean = true;
   editPasswordForm: FormGroup = this.fb.group({
+    account_title: this.fb.control('', [
+      Validators.maxLength(100),
+      Validators.required,
+    ]),
     account_name: this.fb.control('', [
       Validators.maxLength(50),
       Validators.required,

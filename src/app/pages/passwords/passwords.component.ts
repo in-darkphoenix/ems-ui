@@ -38,6 +38,10 @@ export class PasswordsComponent {
 
   passwordForm: FormGroup = this.fb.group({
     password_id: this.fb.control('0'),
+    account_title: this.fb.control('', [
+      Validators.maxLength(100),
+      Validators.required,
+    ]),
     account_name: this.fb.control('', [
       Validators.maxLength(50),
       Validators.required,
@@ -59,6 +63,7 @@ export class PasswordsComponent {
 
   createPasswordLog() {
     const addPasswordFormInput: IPasswordRequestBody = {
+      account_title: this.passwordForm.get('account_title')?.value,
       account_name: this.passwordForm.get('account_name')?.value,
       account_url: this.passwordForm.get('account_url')?.value || null,
       original_password: this.passwordForm.get('original_password')?.value,
@@ -106,6 +111,7 @@ export class PasswordsComponent {
       height: 'auto',
       width: '2000px',
       data: {
+        account_title: passwordBody.account_title,
         account_name: passwordBody.account_name,
         account_url: passwordBody.account_url,
         expiry_date: passwordBody.expiry_date,
